@@ -1,6 +1,7 @@
 // IMPORTING MODULES
 const express = require('express');
 const http = require('http');
+const mongoose = require('mongoose');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -10,6 +11,14 @@ var io = require("socket.io")(server);
 
 // MIDDLE WARE
 app.use(express.json()); 
+
+const DB = "mongodb+srv://mizaeleduardo:1234qwer@cluster0.444bkru.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(DB).then(() => {
+    console.log("Connection successful!");
+}).catch((e) => {
+    console.log(e);
+});
 
 server.listen(port, '0.0.0.0', () => {
     console.log(`Server started and running on port ${port}`);
