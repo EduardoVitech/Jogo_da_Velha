@@ -14,6 +14,10 @@ app.use(express.json());
 
 const DB = "mongodb+srv://mizaeleduardo:1234qwer@cluster0.444bkru.mongodb.net/?retryWrites=true&w=majority";
 
+io.onconnection('connection', (socket) => {
+    console.log("Connected!");
+});
+
 mongoose.connect(DB).then(() => {
     console.log("Connection successful!");
 }).catch((e) => {
