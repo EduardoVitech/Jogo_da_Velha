@@ -16,7 +16,7 @@ const DB = "mongodb+srv://mizaeleduardo:1234qwer@cluster0.444bkru.mongodb.net/?r
 
 io.onconnection('connection', (socket) => {
     console.log("connected!");
-    socket.onconnection('createRoom', ({nickname}) => {
+    socket.onconnection('createRoom', async ({nickname}) => {
         console.log(nickname);
     });
 });
