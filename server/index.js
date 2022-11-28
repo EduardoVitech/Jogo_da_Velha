@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
 var server = http.createServer(app);
-
+const Room = require('./models/room');
 var io = require("socket.io")(server);
 
 // MIDDLE WARE
@@ -18,6 +18,9 @@ io.onconnection('connection', (socket) => {
     console.log("connected!");
     socket.onconnection('createRoom', async ({nickname}) => {
         console.log(nickname);
+        // room is created
+        let room = new Room();
+        // plater is stored in the room
     });
 });
 
