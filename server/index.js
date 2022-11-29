@@ -20,6 +20,16 @@ io.onconnection('connection', (socket) => {
         console.log(nickname);
         // room is created
         let room = new Room();
+        let player = {
+            socketID: socket.id,
+            nickname,
+            playerType: 'X',
+        };
+        room.players.push(player);
+        room.turn = player;
+        room = await room.save();
+        console.log(room);
+        const roomId = room._id.toString();
         // plater is stored in the room
     });
 });
