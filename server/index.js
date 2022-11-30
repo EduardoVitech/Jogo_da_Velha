@@ -18,7 +18,8 @@ io.onconnection('connection', (socket) => {
     console.log("connected!");
     socket.onconnection('createRoom', async ({nickname}) => {
         console.log(nickname);
-        // room is created
+        try {
+            // room is created
         let room = new Room();
         let player = {
             socketID: socket.id,
@@ -30,7 +31,15 @@ io.onconnection('connection', (socket) => {
         room = await room.save();
         console.log(room);
         const roomId = room._id.toString();
-        // plater is stored in the room
+
+        socket.join(roomId);
+        // io -> send data to everyone
+        // socket -> sending data to yourself
+        io.to(roomId).emit('createRoomSuccess', room);
+        } catch (e) {
+            console.log(e);
+        }
+        
     });
 });
 
